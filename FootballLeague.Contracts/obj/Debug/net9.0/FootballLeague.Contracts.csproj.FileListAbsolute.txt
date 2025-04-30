@@ -1,0 +1,11 @@
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/bin/Debug/net9.0/FootballLeague.Contracts.deps.json
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/bin/Debug/net9.0/FootballLeague.Contracts.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/bin/Debug/net9.0/FootballLeague.Contracts.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.AssemblyInfoInputs.cache
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.AssemblyInfo.cs
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.csproj.CoreCompileInputs.cache
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/refint/FootballLeague.Contracts.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/FootballLeague.Contracts.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/obj/Debug/net9.0/ref/FootballLeague.Contracts.dll

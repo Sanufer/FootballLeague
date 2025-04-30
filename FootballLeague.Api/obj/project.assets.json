@@ -1,0 +1,227 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "Microsoft.AspNetCore.OpenApi/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.OpenApi": "1.6.17"
+        },
+        "compile": {
+          "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Microsoft.OpenApi/1.6.17": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "FootballLeague.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "FootballLeague.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FootballLeague.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FootballLeague.Application.dll": {}
+        }
+      },
+      "FootballLeague.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/FootballLeague.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FootballLeague.Contracts.dll": {}
+        }
+      },
+      "FootballLeague.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/FootballLeague.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FootballLeague.Domain.dll": {}
+        }
+      },
+      "FootballLeague.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "FootballLeague.Application": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FootballLeague.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FootballLeague.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.AspNetCore.OpenApi/9.0.0": {
+      "sha512": "FqUK5j1EOPNuFT7IafltZQ3cakqhSwVzH5ZW1MhZDe4pPXs9sJ2M5jom1Omsu+mwF2tNKKlRAzLRHQTZzbd+6Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.openapi/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll",
+        "lib/net9.0/Microsoft.AspNetCore.OpenApi.xml",
+        "microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.openapi.nuspec"
+      ]
+    },
+    "Microsoft.OpenApi/1.6.17": {
+      "sha512": "Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA==",
+      "type": "package",
+      "path": "microsoft.openapi/1.6.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Microsoft.OpenApi.dll",
+        "lib/netstandard2.0/Microsoft.OpenApi.pdb",
+        "lib/netstandard2.0/Microsoft.OpenApi.xml",
+        "microsoft.openapi.1.6.17.nupkg.sha512",
+        "microsoft.openapi.nuspec"
+      ]
+    },
+    "FootballLeague.Application/1.0.0": {
+      "type": "project",
+      "path": "../FootballLeague.Application/FootballLeague.Application.csproj",
+      "msbuildProject": "../FootballLeague.Application/FootballLeague.Application.csproj"
+    },
+    "FootballLeague.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../FootballLeague.Contracts/FootballLeague.Contracts.csproj",
+      "msbuildProject": "../FootballLeague.Contracts/FootballLeague.Contracts.csproj"
+    },
+    "FootballLeague.Domain/1.0.0": {
+      "type": "project",
+      "path": "../FootballLeague.Domain/FootballLeague.Domain.csproj",
+      "msbuildProject": "../FootballLeague.Domain/FootballLeague.Domain.csproj"
+    },
+    "FootballLeague.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../FootballLeague.Infrastructure/FootballLeague.Infrastructure.csproj",
+      "msbuildProject": "../FootballLeague.Infrastructure/FootballLeague.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "FootballLeague.Application >= 1.0.0",
+      "FootballLeague.Contracts >= 1.0.0",
+      "FootballLeague.Infrastructure >= 1.0.0",
+      "Microsoft.AspNetCore.OpenApi >= 9.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/sanufer/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Api/FootballLeague.Api.csproj",
+      "projectName": "FootballLeague.Api",
+      "projectPath": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Api/FootballLeague.Api.csproj",
+      "packagesPath": "/Users/sanufer/.nuget/packages/",
+      "outputPath": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Api/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/sanufer/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Application/FootballLeague.Application.csproj": {
+              "projectPath": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Application/FootballLeague.Application.csproj"
+            },
+            "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/FootballLeague.Contracts.csproj": {
+              "projectPath": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Contracts/FootballLeague.Contracts.csproj"
+            },
+            "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/FootballLeague.Infrastructure.csproj": {
+              "projectPath": "/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/FootballLeague.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.OpenApi": {
+            "target": "Package",
+            "version": "[9.0.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

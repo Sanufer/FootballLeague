@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "FootballLeague.Application/1.0.0": {
+        "dependencies": {
+          "FootballLeague.Domain": "1.0.0"
+        },
+        "runtime": {
+          "FootballLeague.Application.dll": {}
+        }
+      },
+      "FootballLeague.Domain/1.0.0": {
+        "runtime": {
+          "FootballLeague.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FootballLeague.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FootballLeague.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

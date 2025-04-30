@@ -1,0 +1,17 @@
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Infrastructure.deps.json
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Infrastructure.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Infrastructure.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.AssemblyInfoInputs.cache
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.AssemblyInfo.cs
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/refint/FootballLeague.Infrastructure.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/ref/FootballLeague.Infrastructure.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Application.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Domain.dll
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Application.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/bin/Debug/net9.0/FootballLeague.Domain.pdb
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/FootballLeague.Infrastructure.csproj.AssemblyReference.cache
+/Users/sanufer/Desktop/LEARNING/Git Projects/FootballLeague_API/FootballLeague.Infrastructure/obj/Debug/net9.0/Football.6D3AD167.Up2Date
