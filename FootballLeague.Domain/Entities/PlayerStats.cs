@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace FootballLeague.Domain.Entities
 {
     public class PlayerStats
     {
+        [Key]
         public int PlayerStatsId { get; set; }  // Primary key
 
         public int Appearances { get; set; }    // Matches played

@@ -4,6 +4,7 @@ namespace FootballLeague.Domain.Entities
 {
     public class Leagues
     {
+        [Key]
         public int LeagueId { get; set; } // Unique identifier for the league
 
         [Required]

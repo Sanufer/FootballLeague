@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FootballLeague.Domain.Entities
 {
     public class Teams
     {
+        [Key]
         public int TeamId { get; set; }  // Unique identifier for the team
         public string Name { get; set; }  = string.Empty; // Name of the team (e.g., "Manchester United")
         public string Coach { get; set; } = string.Empty; // Name of the team's coach

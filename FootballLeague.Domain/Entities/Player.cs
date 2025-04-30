@@ -8,6 +8,7 @@ namespace FootballLeague.Domain.Entities
 {
     public class Player
     {
+        [Key]
         public int PlayerId { get; set; }  // Unique identifier
 
         [Required]
