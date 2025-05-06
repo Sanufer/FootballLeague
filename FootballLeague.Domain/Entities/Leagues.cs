@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FootballLeague.Domain.Entities
 {
@@ -16,6 +17,7 @@ namespace FootballLeague.Domain.Entities
         [Required]
         public int FoundedYear { get; set; } // The year the league was founded (e.g., 1992)
 
-        public List<Teams> Teams { get; set; }
+        [JsonIgnore]
+        public List<Teams>? Teams { get; set; }
     }
 }
