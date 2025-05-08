@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace FootballLeague.Domain.Entities
 {
-    public class Leagues
+    public class League
     {
         [Key]
         public int LeagueId { get; set; } // Unique identifier for the league
@@ -18,6 +18,6 @@ namespace FootballLeague.Domain.Entities
         public int FoundedYear { get; set; } // The year the league was founded (e.g., 1992)
 
         [JsonIgnore]
-        public List<Teams>? Teams { get; set; }
+        public List<Team>? Teams { get; set; }
     }
 }

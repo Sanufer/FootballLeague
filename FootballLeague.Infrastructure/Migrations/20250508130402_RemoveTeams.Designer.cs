@@ -2,6 +2,7 @@
 using FootballLeague.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FootballLeague.Infrastructure.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508130402_RemoveTeams")]
+    partial class RemoveTeams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,16 +66,16 @@ namespace FootballLeague.Infrastructure.Migrations
 
                     b.HasKey("PlayerId");
 
-                    b.ToTable("Players");
+                    b.ToTable("Player");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStat", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStats", b =>
                 {
-                    b.Property<int>("PlayerStatId")
+                    b.Property<int>("PlayerStatsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatsId"));
 
                     b.Property<int>("Appearances")
                         .HasColumnType("integer");
@@ -92,62 +95,9 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.Property<int>("YellowCards")
                         .HasColumnType("integer");
 
-                    b.HasKey("PlayerStatId");
+                    b.HasKey("PlayerStatsId");
 
                     b.ToTable("PlayerStats");
-                });
-
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
-                {
-                    b.Property<int>("TeamId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TeamId"));
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Coach")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("FoundedYear")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("LeagueId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Stadium")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("TeamId");
-
-                    b.HasIndex("LeagueId");
-
-                    b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
-                {
-                    b.HasOne("FootballLeague.Domain.Entities.League", "League")
-                        .WithMany("Teams")
-                        .HasForeignKey("LeagueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("League");
-                });
-
-            modelBuilder.Entity("FootballLeague.Domain.Entities.League", b =>
-                {
-                    b.Navigation("Teams");
                 });
 #pragma warning restore 612, 618
         }

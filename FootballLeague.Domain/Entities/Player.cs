@@ -19,6 +19,6 @@ namespace FootballLeague.Domain.Entities
 
         public int TeamId { get; set; } // Foreign key to Team
 
-        public Teams Teams { get; set; } // Navigation property
+        public Team? Teams { get; set; } // Navigation property
     }
 }

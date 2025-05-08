@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FootballLeague.Domain.Entities
 {
-    public class PlayerStats
+    public class PlayerStat
     {
         [Key]
-        public int PlayerStatsId { get; set; }  // Primary key
+        public int PlayerStatId { get; set; }  // Primary key
 
         public int Appearances { get; set; }    // Matches played
         public int Goals { get; set; }          // Goals scored
@@ -19,6 +19,6 @@ namespace FootballLeague.Domain.Entities
         public int MinutesPlayed { get; set; }  // Total minutes played
 
         public int PlayerId { get; set; }       // Foreign key to Player
-        public Player Player { get; set; }      // Navigation property
+        public Player? Player { get; set; }      // Navigation property
     }
 }

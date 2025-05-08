@@ -2,6 +2,7 @@
 using FootballLeague.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FootballLeague.Infrastructure.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508122235_DbCorrections")]
+    partial class DbCorrections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,18 +64,26 @@ namespace FootballLeague.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TeamsTeamId")
+                        .HasColumnType("integer");
+
                     b.HasKey("PlayerId");
 
-                    b.ToTable("Players");
+                    b.HasIndex("TeamsTeamId");
+
+                    b.ToTable("Player");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStat", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStats", b =>
                 {
-                    b.Property<int>("PlayerStatId")
+                    b.Property<int>("PlayerStatsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatsId"));
 
                     b.Property<int>("Appearances")
                         .HasColumnType("integer");
@@ -86,18 +97,23 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.Property<int>("MinutesPlayed")
                         .HasColumnType("integer");
 
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("RedCards")
                         .HasColumnType("integer");
 
                     b.Property<int>("YellowCards")
                         .HasColumnType("integer");
 
-                    b.HasKey("PlayerStatId");
+                    b.HasKey("PlayerStatsId");
+
+                    b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerStats");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Teams", b =>
                 {
                     b.Property<int>("TeamId")
                         .ValueGeneratedOnAdd()
@@ -134,20 +150,37 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Player", b =>
                 {
-                    b.HasOne("FootballLeague.Domain.Entities.League", "League")
-                        .WithMany("Teams")
+                    b.HasOne("FootballLeague.Domain.Entities.Teams", "Teams")
+                        .WithMany()
+                        .HasForeignKey("TeamsTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStats", b =>
+                {
+                    b.HasOne("FootballLeague.Domain.Entities.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Teams", b =>
+                {
+                    b.HasOne("FootballLeague.Domain.Entities.League", "Leagues")
+                        .WithMany()
                         .HasForeignKey("LeagueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("League");
-                });
-
-            modelBuilder.Entity("FootballLeague.Domain.Entities.League", b =>
-                {
-                    b.Navigation("Teams");
+                    b.Navigation("Leagues");
                 });
 #pragma warning restore 612, 618
         }

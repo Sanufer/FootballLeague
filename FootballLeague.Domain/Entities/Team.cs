@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FootballLeague.Domain.Entities
 {
-    public class Teams
+    public class Team
     {
         [Key]
         public int TeamId { get; set; }  // Unique identifier for the team
@@ -11,7 +12,10 @@ namespace FootballLeague.Domain.Entities
         public string Stadium { get; set; } = string.Empty; // Home stadium of the team
         public int FoundedYear { get; set; } // Year the team was founded
         public string City { get; set; } = string.Empty; //City the Team is based on 
-        public int LeagueId { get; set; } //Foreign key to the League
-        public Leagues Leagues { get; set; } // Navigation property to League
+        
+        public int LeagueId { get; set; } // Foreign key to the League
+
+        [JsonIgnore]
+        public League? League { get; set; } // Navigation property to League
     }
 }

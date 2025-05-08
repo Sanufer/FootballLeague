@@ -14,13 +14,13 @@ namespace FootballLeague.Infrastructure.Data
 
         }
 
-        public DbSet<Leagues> Leagues { get; set; }
+        public DbSet<League> Leagues { get; set; }
 
-        public DbSet<Teams> Teams { get; set; }
+        public DbSet<Team> Teams { get; set; }
 
-        public DbSet<Player> Player { get; set; }
+        public DbSet<Player> Players { get; set; }
 
-        public DbSet<PlayerStats> PlayerStats { get; set; }
+        public DbSet<PlayerStat> PlayerStats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

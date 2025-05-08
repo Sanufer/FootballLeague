@@ -2,6 +2,7 @@
 using FootballLeague.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FootballLeague.Infrastructure.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508111918_RemovedLeagueLeagueId")]
+    partial class RemovedLeagueLeagueId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace FootballLeague.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.League", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Leagues", b =>
                 {
                     b.Property<int>("LeagueId")
                         .ValueGeneratedOnAdd()
@@ -61,18 +64,26 @@ namespace FootballLeague.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TeamsTeamId")
+                        .HasColumnType("integer");
+
                     b.HasKey("PlayerId");
 
-                    b.ToTable("Players");
+                    b.HasIndex("TeamsTeamId");
+
+                    b.ToTable("Player");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStat", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStats", b =>
                 {
-                    b.Property<int>("PlayerStatId")
+                    b.Property<int>("PlayerStatsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PlayerStatsId"));
 
                     b.Property<int>("Appearances")
                         .HasColumnType("integer");
@@ -86,18 +97,23 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.Property<int>("MinutesPlayed")
                         .HasColumnType("integer");
 
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("RedCards")
                         .HasColumnType("integer");
 
                     b.Property<int>("YellowCards")
                         .HasColumnType("integer");
 
-                    b.HasKey("PlayerStatId");
+                    b.HasKey("PlayerStatsId");
+
+                    b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerStats");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Teams", b =>
                 {
                     b.Property<int>("TeamId")
                         .ValueGeneratedOnAdd()
@@ -119,6 +135,9 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.Property<int>("LeagueId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("LeaguesLeagueId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -129,23 +148,43 @@ namespace FootballLeague.Infrastructure.Migrations
 
                     b.HasKey("TeamId");
 
-                    b.HasIndex("LeagueId");
+                    b.HasIndex("LeaguesLeagueId");
 
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Team", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Player", b =>
                 {
-                    b.HasOne("FootballLeague.Domain.Entities.League", "League")
-                        .WithMany("Teams")
-                        .HasForeignKey("LeagueId")
+                    b.HasOne("FootballLeague.Domain.Entities.Teams", "Teams")
+                        .WithMany()
+                        .HasForeignKey("TeamsTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("League");
+                    b.Navigation("Teams");
                 });
 
-            modelBuilder.Entity("FootballLeague.Domain.Entities.League", b =>
+            modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStats", b =>
+                {
+                    b.HasOne("FootballLeague.Domain.Entities.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Teams", b =>
+                {
+                    b.HasOne("FootballLeague.Domain.Entities.Leagues", "Leagues")
+                        .WithMany("Teams")
+                        .HasForeignKey("LeaguesLeagueId");
+
+                    b.Navigation("Leagues");
+                });
+
+            modelBuilder.Entity("FootballLeague.Domain.Entities.Leagues", b =>
                 {
                     b.Navigation("Teams");
                 });

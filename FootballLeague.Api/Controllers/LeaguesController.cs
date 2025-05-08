@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FootballLeague.Application.IRepositories;
 using FootballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +10,8 @@ namespace FootballLeague.Api.Controllers
     public class LeaguesController : ControllerBase
     {
         private readonly ILeaguesRepository _leaguesRepository;
-        private readonly IFootballLeagueRepository<Leagues> _footballLeagueRepository;
-        public LeaguesController(ILeaguesRepository leaguesRepository , IFootballLeagueRepository<Leagues> footballLeagueRepository)
+        private readonly IFootballLeagueRepository<League> _footballLeagueRepository;
+        public LeaguesController(ILeaguesRepository leaguesRepository , IFootballLeagueRepository<League> footballLeagueRepository)
         {
            _leaguesRepository = leaguesRepository;
            _footballLeagueRepository = footballLeagueRepository;
@@ -39,7 +36,7 @@ namespace FootballLeague.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddLeagues([FromBody] Leagues league)
+        public async Task<IActionResult> AddLeagues([FromBody] League league)
         {
             if (league == null)
             {
@@ -51,7 +48,7 @@ namespace FootballLeague.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateLeagues(int leagueId, [FromBody] Leagues league)
+        public async Task<IActionResult> UpdateLeagues(int leagueId, [FromBody] League league)
         {
             var existingLeague = await _footballLeagueRepository.GetRecord(leagueId);
             if (existingLeague == null)
