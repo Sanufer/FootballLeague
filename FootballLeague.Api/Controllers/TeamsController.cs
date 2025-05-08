@@ -19,16 +19,25 @@ namespace FootballLeague.Api.Controllers
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
             var teams = await _footballLeagueRepository.GetAllRecords();
+            if (teams == null || !teams.Any())
+            {
+            return NotFound("No teams found.");
+            }
             return Ok(teams);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid team ID.");
+            }
+
             var team = await _footballLeagueRepository.GetRecord(id);
             if (team == null)
             {
-                return NotFound();
+                return NotFound($"Team with ID {id} not found.");
             }
             return Ok(team);
         }
@@ -38,7 +47,12 @@ namespace FootballLeague.Api.Controllers
         {
             if (team == null)
             {
-                return BadRequest();
+                return BadRequest("Team cannot be null.");
+            }
+
+            if (string.IsNullOrWhiteSpace(team.Name))
+            {
+                return BadRequest("Team name is required.");
             }
 
             await _footballLeagueRepository.AddRecord(team);
@@ -48,22 +62,27 @@ namespace FootballLeague.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTeam(int id, [FromBody] Team team)
         {
-            if (id != team.TeamId)
+            if (id <= 0)
             {
-                return BadRequest();
+                return BadRequest("Invalid team ID.");
+            }
+
+            if (team == null)
+            {
+                return BadRequest("Team cannot be null.");
             }
 
             var existingTeam = await _footballLeagueRepository.GetRecord(id);
             if (existingTeam == null)
             {
-                return NotFound();
+                return NotFound($"Team with ID {id} not found.");
             }
              
-            existingTeam.Name = team.Name;
-            existingTeam.Coach = team.Coach;
-            existingTeam.Stadium = team.Stadium;
+            existingTeam.Name = team.Name ?? existingTeam.Name;
+            existingTeam.Coach = team.Coach ?? existingTeam.Coach;
+            existingTeam.Stadium = team.Stadium ?? existingTeam.Stadium;
             existingTeam.FoundedYear = team.FoundedYear;
-            existingTeam.City = team.City;
+            existingTeam.City = team.City ?? existingTeam.City;
             existingTeam.LeagueId = team.LeagueId;
 
             await _footballLeagueRepository.UpdateRecord(team);
@@ -73,10 +92,15 @@ namespace FootballLeague.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeam(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("Invalid team ID.");
+            }
+
             var team = await _footballLeagueRepository.GetRecord(id);
             if (team == null)
             {
-                return NotFound();
+                    return NotFound($"Team with ID {id} not found.");
             }
 
             await _footballLeagueRepository.DeleteRecord(team);
