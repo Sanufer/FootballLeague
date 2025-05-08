@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,8 +18,10 @@ namespace FootballLeague.Domain.Entities
         [Required]
         public string Position { get; set; }  =  string.Empty; // e.g., Goalkeeper, Defender, Midfielder, Forward
 
-        public int TeamId { get; set; } // Foreign key to Team
+        [Required]
+        public string Nationality { get; set; } = string.Empty;
 
-        public Team? Teams { get; set; } // Navigation property
+        [Required]
+        public int Age { get; set; }
     }
 }
