@@ -2,6 +2,7 @@
 using FootballLeague.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FootballLeague.Infrastructure.Migrations
 {
     [DbContext(typeof(FootballLeagueDbContext))]
-    partial class FootballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508152315_UpdatedPlayerEntity")]
+    partial class UpdatedPlayerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,12 +71,7 @@ namespace FootballLeague.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("TeamId")
-                        .HasColumnType("integer");
-
                     b.HasKey("PlayerId");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("Players");
                 });
@@ -149,17 +147,6 @@ namespace FootballLeague.Infrastructure.Migrations
                     b.HasIndex("LeagueId");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("FootballLeague.Domain.Entities.Player", b =>
-                {
-                    b.HasOne("FootballLeague.Domain.Entities.Team", "Teams")
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("FootballLeague.Domain.Entities.PlayerStat", b =>
