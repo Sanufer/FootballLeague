@@ -8,11 +8,13 @@ namespace FootballLeague.Api.Controllers
     [Route("api/[controller]")]
     public class PlayersController : ControllerBase
     {
-        private readonly IFootballLeagueRepository<Player>  _footballLeagueRepository;
+        private readonly IFootballLeagueRepository<Player> _footballLeagueRepository;
+        private readonly IPlayersRepository _playersRepository;
 
-        public PlayersController(IFootballLeagueRepository<Player> footballLeagueRepository)
+        public PlayersController(IFootballLeagueRepository<Player> footballLeagueRepository, IPlayersRepository playersRepository)
         {
             _footballLeagueRepository = footballLeagueRepository;
+            _playersRepository = playersRepository;
         }
 
         [HttpGet]
@@ -43,6 +45,48 @@ namespace FootballLeague.Api.Controllers
 
             await _footballLeagueRepository.AddRecord(player);
             return CreatedAtAction(nameof(GetPlayer), new { id = player.PlayerId }, player);
+        }
+
+        [HttpPost("bulk")]
+        public async Task<ActionResult> CreatePlayers([FromBody] List<Player> players)
+        {
+            if ((players == null) || !players.Any())
+            {
+                return BadRequest("No players provided.");
+            }
+
+            var playersToAdd = new List<Player>();
+            var existingPlayers = new List<string>();
+
+            foreach (var item in players)
+            {
+                if (await _playersRepository.PlayerExistsAsync(item.Name))
+                {
+                    existingPlayers.Add(item.Name);
+                }
+                else
+                {
+                    playersToAdd.Add(new Player
+                    {
+                        Name = item.Name,
+                        Position = item.Position,
+                        Nationality = item.Nationality,
+                        Age = item.Age,
+                        TeamId = item.TeamId
+                    });
+                }
+            }
+
+            if (!playersToAdd.Any())
+                return Conflict("All provided players already exist.");
+
+            await _playersRepository.AddPlayers(playersToAdd);
+
+            if (existingPlayers.Any())
+            {
+                return Ok($"{playersToAdd.Count} players added successfully. The following players were skipped as they already exist: {string.Join(", ", existingPlayers)}");
+            }
+            return Ok($"{players.Count} players added successfully.");
         }
 
         [HttpPut("{id}")]

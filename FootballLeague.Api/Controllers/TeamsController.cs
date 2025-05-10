@@ -10,9 +10,11 @@ namespace FootballLeague.Api.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly IFootballLeagueRepository<Team> _footballLeagueRepository;
-        public TeamsController(IFootballLeagueRepository<Team> footballLeagueRepository)
+        private readonly ITeamsRepository _teamsRepository;
+        public TeamsController(IFootballLeagueRepository<Team> footballLeagueRepository, ITeamsRepository teamsRepository)
         {
             _footballLeagueRepository = footballLeagueRepository;
+            _teamsRepository = teamsRepository;
         }
         
         [HttpGet]
@@ -59,6 +61,38 @@ namespace FootballLeague.Api.Controllers
             return CreatedAtAction(nameof(GetTeam), new { id = team.TeamId }, team);
         }
 
+        [HttpPost("bulk")]
+        public async Task<ActionResult> CreateTeams([FromBody] List<Team> teams)
+        {
+            if (teams == null || !teams.Any())
+            {
+                return BadRequest("No teams provided.");
+            }
+
+            var teamsToAdd = new List<Team>();
+            var existingTeams = new List<string>();
+
+            foreach (var item in teams)
+            {
+                if (await _teamsRepository.TeamExistsAsync(item.Name))
+                {
+                    existingTeams.Add(item.Name);
+                }
+                else
+                {
+                    teamsToAdd.Add(item);
+                }
+            }
+
+            if (existingTeams.Any())
+            {
+                return Conflict($"The following teams already exist: {string.Join(", ", existingTeams)}");
+            }
+
+            await _teamsRepository.AddTeams(teamsToAdd);
+            return CreatedAtAction(nameof(GetTeams), teamsToAdd);
+        }
+         
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTeam(int id, [FromBody] Team team)
         {
