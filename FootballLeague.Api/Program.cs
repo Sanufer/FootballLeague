@@ -8,6 +8,8 @@ builder.Services.AddDbContext<FootballLeagueDbContext>(options =>
    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddInfrastructure();
 
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
    options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -24,6 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllers();
 app.Run();
 
