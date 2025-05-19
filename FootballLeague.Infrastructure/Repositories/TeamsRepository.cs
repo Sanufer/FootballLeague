@@ -28,5 +28,12 @@ namespace FootballLeague.Infrastructure.Repositories
         {
             return  await _footballLeagueDbContext.Teams.AnyAsync(t => t.Name == name);
         }
+
+        public async Task<List<Team>> GetTeamsByLeagueIdAsync(int leagueId)
+        {
+            return await _footballLeagueDbContext.Teams
+            .Where(t => t.LeagueId == leagueId)
+            .ToListAsync();
+        }
     }
 }

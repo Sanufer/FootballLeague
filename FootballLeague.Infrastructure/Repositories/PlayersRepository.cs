@@ -23,6 +23,13 @@ namespace FootballLeague.Infrastructure.Repositories
             await _footballLeagueDbContext.SaveChangesAsync();
         }
 
+        public Task<List<Player>> GetPlayersByTeamIdAsync(int teamId)
+        {
+            return _footballLeagueDbContext.Players
+                .Where(p => p.TeamId == teamId)
+                .ToListAsync();
+        }
+
         public async Task<bool> PlayerExistsAsync(string name)
         {
            return await _footballLeagueDbContext.Players.AnyAsync(p=> p.Name == name);

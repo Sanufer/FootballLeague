@@ -11,5 +11,7 @@ namespace FootballLeague.Application.IRepositories
         Task AddPlayers(List<Player> players);
 
         Task<bool> PlayerExistsAsync(string name);
+
+        Task<List<Player>> GetPlayersByTeamIdAsync(int teamId);
     }
 }

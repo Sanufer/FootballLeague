@@ -35,6 +35,17 @@ namespace FootballLeague.Api.Controllers
             return Ok(player);
         }
 
+        [HttpGet("team/{teamId}")]
+        public async Task<ActionResult<IEnumerable<Player>>> GetPlayersByTeamId(int teamId)
+        {
+            var players = await _playersRepository.GetPlayersByTeamIdAsync(teamId);
+            if (players == null || !players.Any())
+            {
+                return NotFound($"No players found for team ID {teamId}.");
+            }
+            return Ok(players);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Player>> CreatePlayer(Player player)
         {
@@ -47,7 +58,7 @@ namespace FootballLeague.Api.Controllers
             return CreatedAtAction(nameof(GetPlayer), new { id = player.PlayerId }, player);
         }
 
-        [HttpPost("bulk")]
+        [HttpPost("players/batch")]
         public async Task<ActionResult> CreatePlayers([FromBody] List<Player> players)
         {
             if ((players == null) || !players.Any())

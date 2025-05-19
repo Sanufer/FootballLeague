@@ -16,14 +16,14 @@ namespace FootballLeague.Api.Controllers
             _footballLeagueRepository = footballLeagueRepository;
             _teamsRepository = teamsRepository;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
             var teams = await _footballLeagueRepository.GetAllRecords();
             if (teams == null || !teams.Any())
             {
-            return NotFound("No teams found.");
+                return NotFound("No teams found.");
             }
             return Ok(teams);
         }
@@ -44,6 +44,22 @@ namespace FootballLeague.Api.Controllers
             return Ok(team);
         }
 
+        [HttpGet("league/{leagueId}")]
+        public async Task<ActionResult<List<Team>>> GetTeamsByLeagueId(int leagueId)
+        {
+           if(leagueId <= 0)
+           {
+               return BadRequest("Invalid league ID.");
+           }
+
+           var teams = await _teamsRepository.GetTeamsByLeagueIdAsync(leagueId);
+           if(teams == null || teams.Any())
+           {
+               return NotFound($"No teams found for league ID {leagueId}.");
+           }
+           return Ok(teams);
+        }        
+
         [HttpPost]
         public async Task<ActionResult<Team>> CreateTeam([FromBody] Team team)
         {
@@ -61,7 +77,7 @@ namespace FootballLeague.Api.Controllers
             return CreatedAtAction(nameof(GetTeam), new { id = team.TeamId }, team);
         }
 
-        [HttpPost("bulk")]
+        [HttpPost("teams/batch")]
         public async Task<ActionResult> CreateTeams([FromBody] List<Team> teams)
         {
             if (teams == null || !teams.Any())
@@ -92,7 +108,7 @@ namespace FootballLeague.Api.Controllers
             await _teamsRepository.AddTeams(teamsToAdd);
             return CreatedAtAction(nameof(GetTeams), teamsToAdd);
         }
-         
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTeam(int id, [FromBody] Team team)
         {
@@ -111,7 +127,7 @@ namespace FootballLeague.Api.Controllers
             {
                 return NotFound($"Team with ID {id} not found.");
             }
-             
+
             existingTeam.Name = team.Name ?? existingTeam.Name;
             existingTeam.Coach = team.Coach ?? existingTeam.Coach;
             existingTeam.Stadium = team.Stadium ?? existingTeam.Stadium;
@@ -134,7 +150,7 @@ namespace FootballLeague.Api.Controllers
             var team = await _footballLeagueRepository.GetRecord(id);
             if (team == null)
             {
-                    return NotFound($"Team with ID {id} not found.");
+                return NotFound($"Team with ID {id} not found.");
             }
 
             await _footballLeagueRepository.DeleteRecord(team);
