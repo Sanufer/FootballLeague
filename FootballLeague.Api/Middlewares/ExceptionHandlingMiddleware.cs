@@ -17,18 +17,43 @@ public class ExceptionHandlingMiddleware : IMiddleware
         }
     }
 
-    private async Task HandleCustomExceptionResponseAsync(HttpContext context, Exception ex)
+    private async Task HandleCustomExceptionResponseAsync(HttpContext context, Exception exception)
     {
-       var problemDetails = new ProblemDetails
-       {
-           Status = (int)HttpStatusCode.InternalServerError,
-           Title = "Internal Server Error",
-           Type = "https://httpstatuses.com/500", 
-       };
+        var problemDetails = exception switch
+        {
+            ArgumentNullException => new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Bad Request",
+                Detail = exception.Message,
+                Type = "https://httpstatuses.com/400"
+            },
+            UnauthorizedAccessException => new ProblemDetails
+            {
+                Status = StatusCodes.Status401Unauthorized,
+                Title = "Unauthorized",
+                Detail = exception.Message,
+                Type = "https://httpstatuses.com/401"
+            },
+            KeyNotFoundException => new ProblemDetails
+            {
+                Status = StatusCodes.Status404NotFound,
+                Title = "Not Found",
+                Detail = exception.Message,
+                Type = "https://httpstatuses.com/404"
+            },
+            _ => new ProblemDetails
+            {
+                Status = StatusCodes.Status500InternalServerError,
+                Title = "An unexpected error occurred",
+                Detail = "Something went wrong. Please contact support.",
+                Type = "https://httpstatuses.com/500"
+            }
+        };
 
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        
+        context.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;
+
         await context.Response.WriteAsJsonAsync(problemDetails);
     }
 }
